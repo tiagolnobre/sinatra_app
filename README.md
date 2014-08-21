@@ -1,26 +1,36 @@
-# SinatraApp
+SinatraApp
+==========
 
 TODO: Write a gem description
 
-## Installation
+Installation
+------------
 
 Add this line to your application's Gemfile:
 
-    gem 'sinatra_app'
+```
+gem 'sinatra_app'
+```
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install sinatra_app
+```
+$ gem install sinatra_app
+```
 
-## Usage
+Usage
+-----
 
 TODO: Write usage instructions here
 
-## Contributing
+Contributing
+------------
 
 1. Fork it ( https://github.com/[my-github-username]/sinatra_app/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
