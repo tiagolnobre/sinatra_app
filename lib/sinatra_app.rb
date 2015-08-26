@@ -5,10 +5,8 @@ module SinatraApp
 
   class Test < Sinatra::Base
     get '/' do
-      "Hello, you're running your web app from a gem!"
+      "Hello, Jo"
     end
 
   end
 end
-
-

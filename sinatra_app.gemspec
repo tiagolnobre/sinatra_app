@@ -22,9 +22,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
 
   spec.add_runtime_dependency "sinatra"
-  #spec.add_runtime_dependency "puma"
+  spec.add_runtime_dependency "rack"
   spec.add_runtime_dependency "haml"
-  spec.add_runtime_dependency "unicorn"
+  # spec.add_runtime_dependency "unicorn"
+  spec.add_runtime_dependency "rack-test"
 
 
 

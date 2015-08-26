@@ -1,1 +1,0 @@
-`unicorn -c #{File.dirname(__FILE__)}/../config/unicorn.rb`
