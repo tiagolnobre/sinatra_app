@@ -1,8 +1,7 @@
 require 'sinatra'
-#configure { set :server, :puma }
+require 'newrelic_rpm'
 
 module SinatraApp
-
   class Test < Sinatra::Base
     get '/' do
       "Hello, Jo"

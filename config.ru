@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
-require './lib/sinatra_app'
+require_relative 'lib/sinatra_app'
 
 run SinatraApp::Test

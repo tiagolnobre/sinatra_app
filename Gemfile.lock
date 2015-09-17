@@ -3,7 +3,7 @@ PATH
   specs:
     sinatra_app (0.0.1)
       haml
-      rack
+      newrelic_rpm
       sinatra
 
 GEM
@@ -12,10 +12,13 @@ GEM
     diff-lcs (1.2.5)
     haml (4.0.7)
       tilt
+    newrelic_rpm (3.13.0.299)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
-    rake (10.3.2)
+    rack-test (0.6.3)
+      rack (>= 1.0)
+    rake (10.4.2)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -29,6 +32,8 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
+    shotgun (0.9.1)
+      rack (>= 1.0)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -40,8 +45,10 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.6)
+  rack-test
   rake
   rspec
+  shotgun
   sinatra_app!
 
 BUNDLED WITH
