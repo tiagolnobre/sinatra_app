@@ -1,12 +1,9 @@
 source 'https://rubygems.org'
 
-gem "rake"
-gem "rspec"
-gem "rack-test"
-
-
-
-
-
+group :development do
+  gem "rake"
+  gem "rspec"
+  gem "rack-test"
+end
 # Specify your gem's dependencies in sinatra_app.gemspec
 gemspec
