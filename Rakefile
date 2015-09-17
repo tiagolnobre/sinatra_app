@@ -6,5 +6,5 @@ task :default => :spec
 desc "Run all specs"
 RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.fail_on_error = true
-  spec.rspec_opts = "--pattern #{File.expand_path("../spec/*_spec.rb", __FILE__)}"
+  spec.rspec_opts = "--pattern #{File.expand_path("../spec/lib/sinatra_app/*_spec.rb", __FILE__)}"
 end
