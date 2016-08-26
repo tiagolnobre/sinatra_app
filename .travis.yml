@@ -3,6 +3,7 @@ rvm:
 - 2.2.3
 
 sudo: required
+dist: trusty
 
 before_install:
   curl -L \
