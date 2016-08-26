@@ -6,8 +6,7 @@ sudo: required
 dist: trusty
 
 before_install:
-  curl -L \
-    https://github.com/rancher/rancher-compose/releases/download/v0.8.6/rancher-compose-linux-amd64-v0.8.6.tar.gz \
+  curl -L https://github.com/rancher/rancher-compose/releases/download/v0.8.6/rancher-compose-linux-amd64-v0.8.6.tar.gz \
     -o rancher-compose.tar.gz && \
   tar zxvf rancher-compose.tar.gz --strip-components 2 && \
   rm -rf rancher-compose.tar.gz && \
