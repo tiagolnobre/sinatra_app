@@ -23,6 +23,7 @@ after_success:
     fi
 
 before_deploy:
+  - echo "DEPLOY FLAG: $DEPLOY "
   - test $DEPLOY = true && \# check that build passed
     && sudo apt-get -qq update
     && sudo apt-get install -y tar
