@@ -16,7 +16,9 @@ script:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     echo "NOT DOING ANYTHING"
-  else
+  fi
+  
+  - if [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY"
   fi
