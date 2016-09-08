@@ -4,10 +4,8 @@ dist: trusty
 
 env:
   global:
+    - RANCHER_COMPOSE_VERSION=0.8.6
     - "DEPLOY=false"
-
-before_install:
-  - sudo apt-get -qq update
 
 script:
   echo "SUCCESS";
@@ -22,23 +20,21 @@ after_success:
     echo "AFTER SUCCESS DO DEPLOY";
     fi
 
-  - echo "DEPLOY FLAG: $DEPLOY "
-
 before_deploy:
-  - echo "DEPLOY FLAG: $DEPLOY "
-  - test $DEPLOY = true && \# check that build passed
+  - test $DEPLOY = true
     && sudo apt-get -qq update
     && sudo apt-get install -y tar
-    && wget https://github.com/rancher/rancher-compose/releases/download/v0.8.6/rancher-compose-linux-amd64-v0.8.6.tar.gz -O rancher-compose.tar.gz
+    && wget https://github.com/rancher/rancher-compose/releases/download/v$RANCHER_COMPOSE_VERSION/rancher-compose-linux-amd64-v$RANCHER_COMPOSE_VERSION.tar.gz -O rancher-compose.tar.gz
     && tar zxvf rancher-compose.tar.gz --strip-components 2
     && rm -rf rancher-compose.tar.gz
     && sudo mv rancher-compose /usr/bin/rancher-compose
     && sudo chmod +x /usr/bin/rancher-compose
-
-  - rancher-compose -v
+    && rancher-compose -v
 
 deploy:
   provider: script
+  skip_cleanup: true
   on:
     condition: $DEPLOY = true
+    all_branches: true
   script: echo "DEPLOYING"
