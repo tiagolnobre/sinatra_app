@@ -11,16 +11,16 @@ before_install:
   - sudo apt-get -qq update
   
 script:
-  echo "SUCCESS"
+  echo "SUCCESS";
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    echo "NOT DOING ANYTHING"
+    echo "NOT DOING ANYTHING";
   fi
   
   - if [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
-    echo "AFTER SUCCESS DO DEPLOY"
+    echo "AFTER SUCCESS DO DEPLOY";
   fi
 
 before_deploy:
