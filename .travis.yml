@@ -23,7 +23,7 @@ after_success:
     fi
 
 before_deploy:
-  - test $TRAVIS_TEST_RESULT = 0 && $DEPLOY = true && \# check that build passed
+  - test $DEPLOY = true && \# check that build passed
     && sudo apt-get -qq update
     && sudo apt-get install -y tar
     && wget https://github.com/rancher/rancher-compose/releases/download/v0.8.6/rancher-compose-linux-amd64-v0.8.6.tar.gz -O rancher-compose.tar.gz
