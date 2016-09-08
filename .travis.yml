@@ -1,5 +1,4 @@
 install: true
-
 sudo: required
 dist: trusty
 
@@ -9,7 +8,7 @@ env:
 
 before_install:
   - sudo apt-get -qq update
-  
+
 script:
   echo "SUCCESS";
 
@@ -17,7 +16,7 @@ after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     echo "NOT DOING ANYTHING";
     fi
-  
+
   - if [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY";
