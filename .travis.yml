@@ -12,8 +12,8 @@ before_install:
   - wget https://github.com/rancher/rancher-compose/releases/download/v0.8.6/rancher-compose-linux-amd64-v0.8.6.tar.gz -O rancher-compose.tar.gz
   - tar zxvf rancher-compose.tar.gz --strip-components 2
   - rm -rf rancher-compose.tar.gz 
-  - mv rancher-compose /usr/bin/rancher-compose
-  - chmod +x /usr/bin/rancher-compose
+  - sudo mv rancher-compose /usr/bin/rancher-compose
+  - sudo chmod +x /usr/bin/rancher-compose
   - rancher-compose -v
   
 
