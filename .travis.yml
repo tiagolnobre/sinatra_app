@@ -30,6 +30,9 @@ before_deploy:
     && sudo mv rancher-compose /usr/bin/rancher-compose
     && sudo chmod +x /usr/bin/rancher-compose
     && rancher-compose -v
+  
+  - print -- "-u $(ACCESS_KEY):$(SECRET_KEY)" > auth
+  - curl -s -L -K auth http://google.com -o config.zip
 
 deploy:
   provider: script
