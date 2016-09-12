@@ -14,7 +14,7 @@ env:
     - DEPLOY=false
 
 script:
-  echo deploy_uat();
+  echo deploy_uat
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
