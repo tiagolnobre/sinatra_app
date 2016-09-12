@@ -6,7 +6,7 @@ before_install:
   function deploy_uat(){ \
     $((git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')); \ 
     echo $?; \
-  }
+  };
 
 env:
   global:
