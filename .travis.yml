@@ -15,7 +15,7 @@ after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     echo "NOT DOING ANYTHING";
     fi
-
+  - DEPLOY_UAT_HASH=$($(git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')); echo $?
   - if $DEPLOY_UAT_HASH && [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY";
