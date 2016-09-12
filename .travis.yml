@@ -9,7 +9,7 @@ env:
     - $((git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')); DEPLOY_UAT_HASH=$?
 
 script:
-  echo `deploy_uat`
+  echo `$DEPLOY_UAT_HASH -eq 0`
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
@@ -18,7 +18,7 @@ after_success:
   
  
 
-  - echo $DEPLOY_UAT_HASH
+  
   - if $DEPLOY_UAT_HASH -eq 0 && [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY";
