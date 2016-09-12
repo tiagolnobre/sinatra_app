@@ -9,7 +9,7 @@ env:
     - $((git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')); DEPLOY_UAT_HASH=$?
 
 script:
-  echo `$DEPLOY_UAT_HASH -eq 0`
+  echo $DEPLOY_UAT_HASH
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
@@ -17,7 +17,7 @@ after_success:
     fi
   
   - if [ $DEPLOY_UAT_HASH -eq 0 ]; then
-    echo 123
+    echo 123;
     fi
 
   
