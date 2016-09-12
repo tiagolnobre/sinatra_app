@@ -21,8 +21,7 @@ after_success:
     echo "NOT DOING ANYTHING";
     fi
   
-  DEPLOY_UAT_HASH=$(deploy_uat)
-  - if DEPLOY_UAT_HASH -eq 0 && [ "$TRAVIS_BRANCH" != "master" ]; then
+  - if $(deploy_uat) -eq 0 && [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY";
     fi
