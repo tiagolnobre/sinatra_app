@@ -16,10 +16,12 @@ after_success:
     echo "NOT DOING ANYTHING";
     fi
   
- 
+ - if [ $DEPLOY_UAT_HASH -eq 0 ]; then
+   echo 123
+   fi
 
   
-  - if $DEPLOY_UAT_HASH -eq 0 && [ "$TRAVIS_BRANCH" != "master" ]; then
+  - if [ $DEPLOY_UAT_HASH -eq 0 ] && [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY";
     fi
