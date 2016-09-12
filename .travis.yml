@@ -2,12 +2,6 @@ install: true
 sudo: required
 dist: trusty
 
-before_install:
-  function deploy_uat(){ \
-    $((git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')); \ 
-    echo $?; \
-  };
-
 env:
   global:
     - RANCHER_COMPOSE_VERSION=0.8.6
@@ -21,7 +15,10 @@ after_success:
     echo "NOT DOING ANYTHING";
     fi
   
-  - if $(deploy_uat) -eq 0 && [ "$TRAVIS_BRANCH" != "master" ]; then
+  - $((git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')); DEPLOY_UAT_HASH=$?
+
+  - echo $DEPLOY_UAT_HASH
+  - if $DEPLOY_UAT_HASH -eq 0 && [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY";
     fi
