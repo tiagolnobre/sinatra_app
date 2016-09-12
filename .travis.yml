@@ -6,7 +6,7 @@ env:
   global:
     - RANCHER_COMPOSE_VERSION=0.8.6
     - DEPLOY=false
-    - DEPLOY_UAT_HASH=$(git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')
+    - DEPLOY_UAT_HASH=$((git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || (git log -n 1 | grep -q '#deployuat')); echo $? 
 
 script:
   echo $DEPLOY_UAT_HASH;
