@@ -3,9 +3,9 @@ sudo: required
 dist: trusty
 
 before_install:
-  function deploy_uat(){ 
-    local  myresult=$((git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat'));
-    echo "$?";
+  function deploy_uat(){ \
+    $((git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')); \ 
+    echo $?; \
   }
 
 env:
@@ -14,15 +14,15 @@ env:
     - DEPLOY=false
 
 script:
-  echo deploy_uat
+  echo `deploy_uat`
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     echo "NOT DOING ANYTHING";
     fi
   
-
-  - if deploy_uat -eq 0 && [ "$TRAVIS_BRANCH" != "master" ]; then
+  DEPLOY_UAT_HASH=$(deploy_uat)
+  - if DEPLOY_UAT_HASH -eq 0 && [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY";
     fi
