@@ -16,8 +16,9 @@ after_success:
     echo "NOT DOING ANYTHING";
     fi
   
-  - $(git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')
+  - $((git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat'))
   - DEPLOY_UAT_HASH=$?
+  - echo $DEPLOY_UAT_HASH
   - if $DEPLOY_UAT_HASH -eq 0 && [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY";
