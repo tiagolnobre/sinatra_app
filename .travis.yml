@@ -31,6 +31,8 @@ before_deploy:
     && sudo chmod +x /usr/bin/rancher-compose
     && rancher-compose -v
   
+  - echo 'user = "defn:$(SECRET_KEY)"' | curl -K - https://google.com
+  
   - echo "login $(ACCESS_KEY) password $(SECRET_KEY)" > auth
   - curl -s -L --netrc-file auth http://google.com -o config.zip
   - ls -la
