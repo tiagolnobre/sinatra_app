@@ -12,15 +12,23 @@ script:
   echo $DEPLOY_UAT_HASH
 
 after_success:
+  - echo $TRAVIS_BRANCH
+
+  - echo $TRAVIS_PULL_REQUEST
+
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     echo "NOT DOING ANYTHING";
     fi
-  
-  - if [ $DEPLOY_UAT_HASH -eq 0 ]; then
-    echo 123;
+
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    echo "11111 - NOT DOING ANYTHING";
     fi
 
-  
+  - if [ $DEPLOY_UAT_HASH -eq 0 ]; then
+    echo "DEPLOY";
+    fi
+
+
   - if [ $DEPLOY_UAT_HASH -eq 0 ] && [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY";
@@ -36,9 +44,9 @@ before_deploy:
     && sudo mv rancher-compose /usr/bin/rancher-compose
     && sudo chmod +x /usr/bin/rancher-compose
     && rancher-compose -v
-  
+
   - echo "user = \"$ACCESS_KEY:$SECRET_KEY\"" | curl -K - https://google.com
-  
+
   - echo "login $(ACCESS_KEY) password $(SECRET_KEY)" > auth
   - curl -s -L --netrc-file auth http://google.com -o config.zip
   - ls -la
