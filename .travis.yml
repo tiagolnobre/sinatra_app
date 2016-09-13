@@ -13,7 +13,7 @@ script:
 
 after_success:
   - echo $TRAVIS_BRANCH
-  
+
   - echo $TRAVIS_PULL_REQUEST
 
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
@@ -53,3 +53,7 @@ deploy:
     condition: $DEPLOY = true
     all_branches: true
   script: echo "DEPLOYING"
+
+branches:
+  only:
+    - master
