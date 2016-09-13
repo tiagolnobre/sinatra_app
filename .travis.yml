@@ -57,8 +57,4 @@ deploy:
     condition: $DEPLOY = true
     all_branches: true
   script: echo "DEPLOYING"
-  
-  
-  branches:
-  only:
-    - master
+
