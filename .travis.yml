@@ -12,6 +12,9 @@ script:
   echo $DEPLOY_UAT_HASH
 
 after_success:
+  - echo $TRAVIS_BRANCH
+  - echo $TRAVIS_PULL_REQUEST
+
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     echo "NOT DOING ANYTHING";
     fi
