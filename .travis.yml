@@ -20,6 +20,10 @@ after_success:
     echo "NOT DOING ANYTHING";
     fi
 
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    echo "11111 - NOT DOING ANYTHING";
+    fi
+
   - if [ $DEPLOY_UAT_HASH -eq 0 ]; then
     echo "DEPLOY";
     fi
@@ -53,7 +57,3 @@ deploy:
     condition: $DEPLOY = true
     all_branches: true
   script: echo "DEPLOYING"
-
-branches:
-  only:
-    - master
