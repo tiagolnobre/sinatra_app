@@ -1,7 +1,7 @@
 install: true
 sudo: required
 dist: trusty
-
+    
 env:
   global:
     - RANCHER_COMPOSE_VERSION=0.8.6
@@ -49,3 +49,8 @@ deploy:
     condition: $DEPLOY = true
     all_branches: true
   script: echo "DEPLOYING"
+  
+  
+  branches:
+  only:
+    - master
