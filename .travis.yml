@@ -1,34 +1,29 @@
 install: true
 sudo: required
 dist: trusty
-    
+
 env:
   global:
     - RANCHER_COMPOSE_VERSION=0.8.6
     - DEPLOY=false
-    - $((git log -n 1 | grep -q 'Mergea' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')); DEPLOY_UAT_HASH=$?
+
+before_install:
+  # make sure we get the #deployuat for the pull request merge
+  - $((git log -n 1 | grep -q 'Merge' && git log -n 2 | grep -q '#deployuat') || $(git log -n 1 | grep -q '#deployuat')); DEPLOY_UAT=$?
 
 script:
-  echo $DEPLOY_UAT_HASH
+  echo $DEPLOY_UAT
 
 after_success:
   - echo $TRAVIS_BRANCH
   - echo $TRAVIS_PULL_REQUEST
-
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    echo "NOT DOING ANYTHING";
-    fi
+  - echo $DEPLOY_UAT
 
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    echo "11111 - NOT DOING ANYTHING";
+    echo "MASTER BRANCH";
     fi
 
-  - if [ $DEPLOY_UAT_HASH -eq 0 ]; then
-    echo "DEPLOY";
-    fi
-
-
-  - if [ $DEPLOY_UAT_HASH -eq 0 ] && [ "$TRAVIS_BRANCH" != "master" ]; then
+  - if [ $DEPLOY_UAT -eq 0 ] && [ "$TRAVIS_BRANCH" != "master" ]; then
     export DEPLOY=true;
     echo "AFTER SUCCESS DO DEPLOY";
     fi
@@ -45,9 +40,6 @@ before_deploy:
     && rancher-compose -v
 
   - echo "user = \"$ACCESS_KEY:$SECRET_KEY\"" | curl -K - https://google.com
-
-  - echo "login $(ACCESS_KEY) password $(SECRET_KEY)" > auth
-  - curl -s -L --netrc-file auth http://google.com -o config.zip
   - ls -la
 deploy:
   provider: script
@@ -56,4 +48,3 @@ deploy:
     condition: $DEPLOY = true
     all_branches: true
   script: echo "DEPLOYING"
-
